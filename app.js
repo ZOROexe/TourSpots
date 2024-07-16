@@ -29,7 +29,7 @@ app.use(override('_method'));
 app.use(express.urlencoded({extended: true}));
 
 const store = MongoStore.create({
-    mongoUrl: fUrl,
+    mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret: 'thisshouldbesecret'
@@ -55,7 +55,7 @@ app.listen(3000, () => {
 //'mongodb://127.0.0.1:27017/Camp'
 
 
-mongoose.connect(fUrl)
+mongoose.connect(dbUrl)
 .then(() => {
     console.log('db CONNECTED!!');
 })
