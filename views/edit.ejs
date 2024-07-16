@@ -1,0 +1,107 @@
+<% layout('./layout/boilerplate') %>
+
+<body style="background-color: #495057;">
+    <div class="contaner col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+        <div class="card bg-dark text-white my-3">
+            <div class="row mt-3 mx-3">
+                <h1 class="card-title text-center">Update Tour Spot</h1>
+                <div class="card-body">
+                    <form action="/destinations/<%= foundDest._id %>?_method=put" method="post" class="needs-validation" novalidate
+                        enctype="multipart/form-data">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control mb-3 bg-dark text-white" name="destination[title]" id="title" value="<%= foundDest.title %>"
+                            autofocus required>
+                    
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control mb-3 bg-dark text-white" name="destination[location]" id="location"
+                            value="<%= foundDest.location %>" required>
+                    
+                        <label for="desc" class="form-label">Description</label>
+                        <textarea class="form-control mb-3 bg-dark text-white" name="destination[description]" id="desc"
+                            required><%= foundDest.description %></textarea>
+                    
+                        <div class="input-group mb-3">
+                            <span class="input-group-text bg-dark text-white" id="price">&#8377;</span>
+                            <input type="number" class="form-control bg-dark text-white" placeholder="Price" id="price" name="destination[price]"
+                                aria-label="Username" aria-describedby="basic-addon1" value="<%= foundDest.price %>">
+                        </div>
+                    
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Upload Images</label>
+                                <input class="form-control bg-dark text-white" type="file" id="image" name="image" multiple>
+                            </div>
+                        </div>
+                    
+                        <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+                            <% foundDest.image.forEach((img, i)=> { %>
+                                <div class="col">
+                                    <div class="card">
+                                        <label for="<%= i %>">
+                                            <img src="<%= img.url %>" class="card-img" alt="">
+                                            <div class="card-img-overlay text-end pt-1 pe-2">
+                                                <input type="checkbox" class="form-check-input" name="deleteImages[]"
+                                                    value="<%= img.filename %>" id="<%= i %>">
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                                <% }) %>
+                        </div>
+        
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+<!-- <div class="row mt-3">
+    <h1 class="text-center">Update Tour Spot</h1>
+    <div class="col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <form action="/destinations/<%= foundDest._id %>?_method=put" method="post" class="needs-validation" novalidate enctype="multipart/form-data">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control mb-3" name="destination[title]" id="title" value="<%= foundDest.title %>" autofocus required>
+
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control mb-3" name="destination[location]" id="location" value="<%= foundDest.location %>" required>
+
+            <label for="desc" class="form-label">Description</label>
+            <textarea class="form-control mb-3" name="destination[description]" id="desc" required><%= foundDest.description %></textarea>
+
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="price">&#8377;</span>
+                <input type="number" class="form-control" placeholder="Price" id="price" name="destination[price]"
+                    aria-label="Username" aria-describedby="basic-addon1" value="<%= foundDest.price %>">
+            </div>
+
+            <div class="mb-3">
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Images</label>
+                    <input class="form-control" type="file" id="image" name="image" multiple>
+                </div>
+            </div>
+
+            <div class="row row-cols-1 row-cols-md-4 g-4 mb-3">
+                <% foundDest.image.forEach((img, i)=> { %>
+                    <div class="col">
+                        <div class="card">
+                            <label for="<%= i %>">
+                                <img src="<%= img.thumbnail %>" class="card-img" alt="">
+                                <div class="card-img-overlay text-end pt-1 pe-2">
+                                    <input type="checkbox" class="form-check-input" name="deleteImages[]" value="<%= img.filename %>" id="<%= i %>">
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
+
+           
+
+            <button class="btn btn-success" type="submit">Submit</button>
+        </form>
+    </div>
+</div> -->

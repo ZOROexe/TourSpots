@@ -1,0 +1,44 @@
+<% layout('./layout/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/maps.css">
+<link rel="stylesheet" href="/stylesheets/index.css">
+
+<div class="container mt-3 text-white">
+    <div id="cluster"></div>
+    <h1 class="text-center">Destinations</h1>
+    <div class="d-flex align-items-center justify-content-center">
+        <a href="/destinations/new" class="btn btn-success mb-4">Create New</a>
+    </div>
+    
+    <% for (let dest of destinations){ %>
+        <div class="card mb-3 shadow-sm bg-dark text-white">
+            <div class="row g-0">
+                <div class="col-md-12 col-lg-4">
+                    <img crossorigin="anonymous" class="card-img img-fluid" src="<%= dest.image[0].url %>" alt="">
+                </div>
+                <div class="col-md-12 col-lg-8">
+                    <div class="card-body">
+                        <h2 class="card-title">
+                            <%= dest.title %>
+                        </h2>
+                        <p class="card-text">
+                            <%= dest.description %>
+                        </p>
+                        <p><small class="card-text text-muted">
+                                <%= dest.location %>
+                            </small></p>
+                        <a href="/destinations/<%= dest._id %>" class="btn btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <%}%>
+</div>
+
+
+<script>
+    const maptilerApiKey = '<%- process.env.MAPTILER_API_KEY %>';
+    const destinations = { features: <%- JSON.stringify(destinations) %>}
+</script>
+
+<script src="/js/clusterMap.js"></script>
+

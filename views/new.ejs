@@ -1,0 +1,41 @@
+<% layout('./layout/boilerplate') %>
+
+<body style="background-color: #495057;">
+    <div class="contaner col-md-6 offset-md-3 col-lg-6 offset-lg-3">
+        <div class="card bg-dark text-white my-3">
+            <div class="row mt-3 mx-3">
+                <h1 class="card-title text-center">Create a Tour spot</h1>
+                <div class="card-body">
+                    <form class="needs-validation" action="/destinations" method="post" novalidate
+                        enctype="multipart/form-data">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control mb-3" name="destination[title]" id="title" required autofocus>
+        
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control mb-3" name="destination[location]" id="location" required>
+        
+                        <label for="desc" class="form-label">Description</label>
+                        <textarea class="form-control mb-3" name="destination[description]" id="desc" required></textarea>
+        
+                        <div class="input-group mb-3">
+                            <span class="input-group-text" id="price">&#8377;</span>
+                            <input type="number" class="form-control" placeholder="Price" id="price" name="destination[price]"
+                                aria-label="Username" aria-describedby="basic-addon1" value="0">
+                        </div>
+        
+                        <div class="mb-3">
+                            <div class="mb-3">
+                                <label for="image" class="form-label">Upload Images</label>
+                                <input class="form-control" type="file" id="image" name="image" multiple required>
+                            </div>
+                        </div>
+        
+                        <button class="btn btn-success" type="submit">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+

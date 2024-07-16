@@ -1,0 +1,125 @@
+<% layout('./layout/boilerplate') %>
+<link rel="stylesheet" href="/stylesheets/stars.css">
+<link rel="stylesheet" href="/stylesheets/maps.css">
+
+
+<script>
+    const MAPTILER_API_KEY = '<%- process.env.MAPTILER_API_KEY %>';
+    const foundDest = <%- JSON.stringify(foundDest) %>
+</script>
+
+<body style="background-color: #495057;">
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div id="destinationCarousel" class="carousel slide">
+                <% if(foundDest.image.length > 1){ %>
+                    <div class="carousel-indicators">
+                        <% foundDest.image.forEach((img, i) => { %>
+                            <button type="button" data-bs-target="#destinationCarousel" data-bs-slide-to="<%= i %>" class="<%= i==0?"active":"" %>"
+                                aria-current="<%= i==0?"true":"false" %>" aria-label="Slide <%= i+1 %>"></button>
+                        <% }) %>
+                    </div>
+                <% } %>
+                <div class="carousel-inner">
+                    <% foundDest.image.forEach((img, i) =>{ %>
+                        <div class="carousel-item <%= i == 0? "active" :"" %>">
+                            <img crossorigin="anonymous" src="<%= img.url %>" class="d-block w-100" alt="">
+                        </div>
+                    <% }) %>
+                </div>
+                <% if(foundDest.image.length > 1){ %>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#destinationCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#destinationCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                <% } %>
+            </div>
+            <div class="card my-3 bg-dark text-white">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <%= foundDest.title %>
+                    </h5>
+                    <p class="card-text">
+                        <%= foundDest.description %>
+                    </p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item bg-dark text-white">
+                        <%= foundDest.location %>
+                    </li>
+                    <li class="list-group-item bg-dark text-white">
+                        Posted by:&nbsp;<%= foundDest.author.username %>
+                    </li>
+                    <li class="list-group-item bg-dark text-white">&#8377;<%= foundDest.price %>
+                    </li>
+                </ul>
+                <% if((currentUser && foundDest.author.equals(currentUser._id)) || (currentUser && currentUser.admin)){ %>
+                    <div class="mb-3 mx-3">
+                        <a href="/destinations/<%= foundDest._id %>/edit" class="card-link btn btn-info">Update</a>
+                        <form class="d-inline" action="/destinations/<%= foundDest._id %>/delete?_method=delete" method="post">
+                            <button class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+        <div class="col-md-6 text-white">
+            <div id='map'></div>
+            <div class="mb-3">
+                <% if(currentUser){ %>
+                    <h3 class="mb-3">Leave A Review</h3>
+                    <form action="/destinations/<%=foundDest._id %>/reviews" method="post" novalidate class="needs-validation">
+                        <fieldset class="starability-basic">
+                            <legend>Rating:</legend>
+                            <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
+                                aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+                        <div class="mb-3">
+                            <label class="form-label" for="review">Review Text</label>
+                            <textarea class="form-control" id="review" name="review[body]" required></textarea>
+                        </div>
+                        <button class="btn btn-success">Submit</button>
+                    </form>
+                <% } %>
+            </div>
+            <% if(!foundDest.review.length){ %>
+                <h3>No Reviews Yet</h3>
+            <% } else { %>
+                <% for(let r of foundDest.review){ %>
+                    <div class="card mb-3 bg-dark text-white">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= r.author.username %></h5>
+                            <p class="starability-result" data-rating="<%= r.rating %>">
+                                Rated: <%= r.rating %> stars
+                            </p>
+                            <p>Review: <%= r.body%></p>
+                            <% if((currentUser && r.author.equals(currentUser)) || (currentUser && currentUser.admin)){ %>
+                                <form action="/destinations/<%= foundDest._id%>/reviews/<%=r._id%>?_method=delete" method="post">
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </form>
+                            <% } %>
+                        </div>
+                    </div>
+                <%} %>
+            <% } %>
+        </div>  
+    </div>
+</body>
+
+<script src="/js/map.js"></script>

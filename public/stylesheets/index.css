@@ -1,0 +1,147 @@
+/* 
+body {
+    background-color: #f8f9fa;
+}
+
+h1.text-center {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #343a40;
+}
+
+
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 10px;
+    border: none;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #343a40;
+}
+
+.card-text {
+    color: #6c757d;
+}
+
+.card img {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.container a {
+    display: inline-block;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+h1.text-center {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #343a40;
+}
+
+a.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary {
+    background-color: #28a745;
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+} */
+
+
+/* index.css */
+
+body {
+    background-color: #495057;
+    /* Lighter dark background */
+}
+
+h1.text-center {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: #f8f9fa;
+    /* Light text color */
+}
+
+a.btn-primary,
+a.btn-success {
+    background-color: #28a745;
+    border: none;
+}
+
+a.btn-primary:hover,
+a.btn-success:hover {
+    background-color: #218838;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    border-radius: 10px;
+    border: none;
+    background-color: #6c757d;
+    /* Lighter card background */
+}
+
+.card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #f8f9fa;
+    /* Light text color */
+    margin-bottom: 0.5rem;
+    /* Reduced bottom margin */
+}
+
+.card-text {
+    color: #ced4da;
+    /* Lighter gray text */
+    margin-bottom: 0.5rem;
+    /* Reduced bottom margin */
+}
+
+.card-body {
+    padding: 1rem 1.5rem;
+    /* Adjust padding */
+}
+
+.card img {
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.container a {
+    display: inline-block;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.btn-primary,
+.btn-success {
+    background-color: #007bff;
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+    background-color: #0056b3;
+}
