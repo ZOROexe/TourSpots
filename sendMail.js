@@ -43,8 +43,7 @@ module.exports = async(id) =>{
         html: html
         };
 
-        const info = await transporter.sendMail(mailOptions)
-        console.log('Mail sent'+ info);
+        const info = await transporter.sendMail(mailOptions);
         
     } catch(error) {
         console.log('error sendin mail' + error);
